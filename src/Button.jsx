@@ -5,7 +5,7 @@ function InstanceButton({ type, onClick, isCompleted }) {
   /* 'complete'/'edit', 'remove', 'add new' buttons */
   let text;
   switch (type) {
-    case "complete":
+    case "completeEdit":
       text = isCompleted ? "Edit" : "Complete";
       break;
     case "remove":
@@ -15,7 +15,11 @@ function InstanceButton({ type, onClick, isCompleted }) {
       text = "Add New";
       break;
   }
-  return <button onClick={onClick}>{text}</button>;
+  return (
+    <button className={type} onClick={onClick}>
+      {text}
+    </button>
+  );
 }
 
 function SectionButton() {}
