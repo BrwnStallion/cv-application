@@ -46,7 +46,7 @@ function App() {
         */}
       </Section>
       <Section title="Educational Experience">
-        {/* school, degree, title of study, date completed */}
+        {/* school, degree, title of study, year completed */}
         {/* include functionality for adding more */}
       </Section>
       <Section title="Professional Experience">
