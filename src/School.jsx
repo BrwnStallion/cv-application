@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { InstanceButton } from "./Button";
 
 function SchoolInstance() {
   const [isCompleted, setIsCompleted] = useState(false);
@@ -9,12 +10,35 @@ function SchoolInstance() {
 
   let button;
   if (!isCompleted) {
+    button = (
+      <>
+        <InstanceButton
+          type="completeEdit"
+          onClick={handleClick}
+          isCompleted={isCompleted}
+        />
+        <InstanceButton type="remove" onClick={handleClick} />
+      </>
+    );
   }
 
+  function handleClick(e) {
+    /* toggle the state (which will trigger a re-render) */
+    if (e.target.className === "completeEdit") {
+      setIsCompleted(!isCompleted);
+    }
+  }
   return (
     <>
       {schoolFields}
-      {button}
+      <div className="section-buttons">
+        <InstanceButton
+          type="completeEdit"
+          onClick={handleClick}
+          isCompleted={isCompleted}
+        />
+        <InstanceButton type="remove" onClick={handleClick} />
+      </div>
     </>
   );
   /*
