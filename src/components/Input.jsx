@@ -8,6 +8,15 @@ function Input({ type }) {
       <input type="text"></input>
     </>
   );
+  /* 
+  Types of Input Controls Req'd
+    - name
+    - email
+    - phone number
+    - text (school, work, titles, etc.)
+    - dates (started, completed)
+    - checkbox (currently studying/employed)
+  */
 }
 
 export { Input };
