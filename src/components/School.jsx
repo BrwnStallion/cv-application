@@ -1,12 +1,17 @@
 import React from "react";
 import { useState } from "react";
+import { Input } from "./Input";
 import { InstanceButton } from "./Button";
 
 function SchoolInstance() {
   const [isCompleted, setIsCompleted] = useState(false);
 
   let schoolFields;
-  schoolFields = <div className="school-instance"></div>;
+  schoolFields = (
+    <div className="school-instance">
+      <Input type="text" />
+    </div>
+  );
 
   let button;
   if (!isCompleted) {
