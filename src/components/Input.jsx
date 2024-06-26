@@ -1,20 +1,25 @@
 import React from "react";
 import { useState } from "react";
 
-function Input({ type, subType, parentSection }) {
+function Input({ value, setValue, type, subType, parentSection }) {
   /* 
   type: name, email, phone, text, date, checkbox
   subType: school, degreeType, degreeName, employer, position, resp, startDate,
   endDate
   parentSection: school, work
   */
+
+  function handleChange() {
+    // setValue({...})
+  }
+
   let inputControl;
   switch (type) {
     case "name":
       inputControl = (
         <>
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name"></input>
+          <input type="text" id="name" name="name" value={value}></input>
         </>
       );
       break;
@@ -22,7 +27,7 @@ function Input({ type, subType, parentSection }) {
       inputControl = (
         <>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email"></input>
+          <input type="email" id="email" name="email" value={value}></input>
         </>
       );
       break;
@@ -30,7 +35,7 @@ function Input({ type, subType, parentSection }) {
       inputControl = (
         <>
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone"></input>
+          <input type="tel" id="phone" name="phone" value={value}></input>
         </>
       );
       break;
@@ -38,7 +43,7 @@ function Input({ type, subType, parentSection }) {
       inputControl = (
         <>
           <label for={subType}></label>
-          <input type="text" id={subType} name={subType}></input>
+          <input type="text" id={subType} name={subType} value={value}></input>
         </>
       );
       break;
@@ -48,7 +53,7 @@ function Input({ type, subType, parentSection }) {
           <label for={subType}>
             {subType === "startDate" ? "Start Date" : "Completion Date"}
           </label>
-          <input type="text" id={subType} name={subType}></input>
+          <input type="text" id={subType} name={subType} value={value}></input>
         </>
       );
       break;
