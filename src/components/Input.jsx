@@ -13,66 +13,80 @@ function Input({ value, setValue, type, subType, parentSection }) {
     // setValue({...})
   }
 
-  let inputControl;
+  const labelAttributes = {
+    for: type,
+    content: "",
+  };
+  const inputAttributes = {
+    type: type,
+    id: type,
+    name: type,
+    value: value,
+    onChange: "",
+  };
+
   switch (type) {
     case "name":
-      inputControl = (
-        <>
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" value={value}></input>
-        </>
-      );
+      labelAttributes.content = "Full Name";
+      inputAttributes.type = "text";
       break;
     case "email":
-      inputControl = (
-        <>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" value={value}></input>
-        </>
-      );
+      labelAttributes.content = "Email";
       break;
     case "phone":
-      inputControl = (
-        <>
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" value={value}></input>
-        </>
-      );
+      labelAttributes.content = "Phone Number";
+      inputAttributes.type = "tel";
       break;
     case "text":
-      inputControl = (
-        <>
-          <label for={subType}></label>
-          <input type="text" id={subType} name={subType} value={value}></input>
-        </>
-      );
+      labelAttributes.for = subType;
+      labelAttributes.content = "";
+      inputAttributes.id = subType;
+      inputAttributes.name = subType;
       break;
     case "date":
-      inputControl = (
-        <>
-          <label for={subType}>
-            {subType === "startDate" ? "Start Date" : "Completion Date"}
-          </label>
-          <input type="text" id={subType} name={subType} value={value}></input>
-        </>
-      );
+      labelAttributes.for = subType;
+      labelAttributes.content =
+        subType === "startDate" ? "Start Date" : "Completion Date";
+      inputAttributes.type = "text";
+      inputAttributes.id = subType;
+      inputAttributes.name = subType;
       break;
     case "checkbox":
-      inputControl = (
-        <>
-          <input
-            type="checkbox"
-            id="current"
-            name="current"
-            value="current"
-          ></input>
-          <label for="current">
-            Current {parentSection === "school" ? "School" : "Employer"}
-          </label>
-        </>
-      );
+      labelAttributes.for = "current";
+      labelAttributes.content = `Current ${
+        parentSection === "school" ? "School" : "Employer"
+      }`;
+      inputAttributes.id = "current";
+      inputAttributes.name = "current";
       break;
   }
+
+  const label = (
+    <label for={labelAttributes.for}>{labelAttributes.content}</label>
+  );
+  const input = (
+    <input
+      type={inputAttributes.type}
+      id={inputAttributes.id}
+      name={inputAttributes.name}
+      value={inputAttributes.value}
+      onChange={handleChange}
+    ></input>
+  );
+
+  let inputControl =
+    type === "checkbox" ? (
+      <>
+        {input}
+        {label}
+      </>
+    ) : (
+      <>
+        {label}
+        {input}
+      </>
+    );
+
   return (
     <>
       <div className={"input " + type}>{inputControl}</div>
