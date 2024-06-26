@@ -7,15 +7,19 @@ function WorkInstance() {
   const [isCompleted, setIsCompleted] = useState(false);
 
   let workFields;
-  workFields = (
-    <div className="work-instance">
-      <Input type="text" subType="employer" parentSection="work" />
-      <Input type="text" subType="position" parentSection="work" />
-      <Input type="date" subType="startDate" parentSection="work" />
-      <Input type="date" subType="endDate" parentSection="work" />
-      <Input type="checkbox" parentSection="work" />
-    </div>
-  );
+  if (isCompleted) {
+    <p></p>;
+  } else {
+    workFields = (
+      <div className="work-instance">
+        <Input type="text" subType="employer" parentSection="work" />
+        <Input type="text" subType="position" parentSection="work" />
+        <Input type="date" subType="startDate" parentSection="work" />
+        <Input type="date" subType="endDate" parentSection="work" />
+        <Input type="checkbox" parentSection="work" />
+      </div>
+    );
+  }
 
   return (
     <>
