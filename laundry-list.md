@@ -15,6 +15,12 @@ CV Application Project
   - responsibilities field is just one input, with a button to add/remove
 - Professional/Education
   - has ability to add/remove new subgroups
+- Add feature to gray out completion date if 'current' is selected
+- Figure out form layout. If all of it is one form with sections. Or separate
+  forms
+  - Maybe sections within the form allow for label names to be reused?
+- Figure out how to update the section info object from the input component
+  - Currently can't figure out how to pass the info object AND the setInfo
 
 06/24/24 - main
 
