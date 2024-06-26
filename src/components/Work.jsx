@@ -17,22 +17,16 @@ function WorkInstance() {
     </div>
   );
 
-  function handleClick(e) {
-    if (e.target.className === "completeEdit") {
-      setIsCompleted(!isCompleted);
-    }
-  }
-
   return (
     <>
       {workFields}
       <div className="section-buttons">
         <InstanceButton
           type="completeEdit"
-          onClick={handleClick}
-          isCompleted={isCompleted}
+          completeState={isCompleted}
+          setState={setIsCompleted}
         />
-        <InstanceButton type="remove" onClick={handleClick} />
+        <InstanceButton type="remove" />
       </div>
     </>
   );
