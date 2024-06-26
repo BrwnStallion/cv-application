@@ -9,23 +9,13 @@ function SchoolInstance() {
   let schoolFields;
   schoolFields = (
     <div className="school-instance">
-      <Input type="text" />
+      <Input type="text" subType="school" parentSection="school" />
+      <Input type="text" subType="degreeType" parentSection="school" />
+      <Input type="text" subType="degreeName" parentSection="school" />
+      <Input type="date" subType="endDate" parentSection="school" />
+      <Input type="checkbox" parentSection="school" />
     </div>
   );
-
-  let button;
-  if (!isCompleted) {
-    button = (
-      <>
-        <InstanceButton
-          type="completeEdit"
-          onClick={handleClick}
-          isCompleted={isCompleted}
-        />
-        <InstanceButton type="remove" onClick={handleClick} />
-      </>
-    );
-  }
 
   function handleClick(e) {
     /* toggle the state (which will trigger a re-render) */
@@ -33,6 +23,7 @@ function SchoolInstance() {
       setIsCompleted(!isCompleted);
     }
   }
+
   return (
     <>
       {schoolFields}
@@ -62,7 +53,7 @@ function SchoolSection() {
   return (
     <>
       <SchoolInstance />
-      <Button type="addNew" />
+      <InstanceButton type="addNew" />
     </>
   );
   /* 
