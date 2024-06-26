@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import "./App.css";
 import Section from "./components/Section.jsx";
+import { GeneralInfo } from "./components/General.jsx";
+import { SchoolSection } from "./components/School.jsx";
+import { WorkSection } from "./components/Work.jsx";
 import { Input } from "./components/Input.jsx";
 
 function App() {
@@ -32,25 +35,22 @@ function App() {
     <>
       <h1>CV Generator</h1>
       <div className="sections">
-        {sectionInfo.map((section) => (
+        {/* {sectionInfo.map((section) => (
           <Section key={section.id} title={section.title}>
             {section.types.map((type, index) => (
               <Input key={index} type={type} />
             ))}
           </Section>
-        ))}
+        ))} */}
       </div>
-      <Section title={sectionInfo[0].title}>
-        {/* 
-        name, email, phone number
-        */}
+      <Section title="General Information">
+        <GeneralInfo />
       </Section>
       <Section title="Educational Experience">
-        {/* school, degree, title of study, year completed */}
-        {/* include functionality for adding more */}
+        <SchoolSection />
       </Section>
       <Section title="Professional Experience">
-        {/* employer, position, responsibilities (add functionality for adding more, date started, date completed (or current) */}
+        <WorkSection />
       </Section>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
