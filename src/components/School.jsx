@@ -17,23 +17,16 @@ function SchoolInstance() {
     </div>
   );
 
-  function handleClick(e) {
-    /* toggle the state (which will trigger a re-render) */
-    if (e.target.className === "completeEdit") {
-      setIsCompleted(!isCompleted);
-    }
-  }
-
   return (
     <>
       {schoolFields}
       <div className="section-buttons">
         <InstanceButton
           type="completeEdit"
-          onClick={handleClick}
-          isCompleted={isCompleted}
+          completeState={isCompleted}
+          setState={setIsCompleted}
         />
-        <InstanceButton type="remove" onClick={handleClick} />
+        <InstanceButton type="remove" />
       </div>
     </>
   );
