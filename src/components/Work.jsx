@@ -9,7 +9,12 @@ function WorkInstance({ id, handleRemove }) {
   const [workExp, setWorkExp] = useState({
     employerName: "",
     positionName: "",
-    resp: {},
+    resp: [
+      {
+        id: uuidv4(),
+        content: "",
+      },
+    ],
     startDate: "",
     endDate: "",
     currentStatus: "",
@@ -17,7 +22,7 @@ function WorkInstance({ id, handleRemove }) {
 
   let parentSection = "work";
   const inputMap = Object.entries(workExp).reduce((accum, [key, value]) => {
-    if (key != "currentStatus") {
+    if (key !== "currentStatus") {
       accum.push(key);
     }
     return accum;
@@ -25,13 +30,32 @@ function WorkInstance({ id, handleRemove }) {
 
   let workFields;
   if (isCompleted) {
-    <p></p>;
+    workFields = (
+      <ul className="work-instance">
+        <li>Employer: {workExp.employerName}</li>
+        <li>Position: {workExp.positionName}</li>
+        <li>
+          <h4>Responsibilities</h4>
+          <ul className="resp-section">
+            {workExp.resp.map((item) => (
+              <li key={item.id}>{item.content}</li>
+            ))}
+          </ul>
+        </li>
+        <li>Start Date: {workExp.startDate}</li>
+        <li>
+          {workExp.currentStatus === "current"
+            ? "Current employer"
+            : "End Date: " + workExp.endDate}
+        </li>
+      </ul>
+    );
   } else {
     workFields = (
       <div className="work-instance">
         {inputMap.map((subType) => {
           if (subType === "resp") {
-            // instantiate resp
+            return <RespSection workExp={workExp} onChange={setWorkExp} />;
           } else {
             return (
               <Input
@@ -57,7 +81,7 @@ function WorkInstance({ id, handleRemove }) {
   return (
     <>
       {workFields}
-      <div className="section-buttons">
+      <div className="instance-buttons">
         <InstanceButton
           type="completeEdit"
           completeState={isCompleted}
@@ -85,18 +109,52 @@ function WorkSection() {
   );
 }
 
-function RespSection() {
-  const [instIdList, setInstIdList] = useState([uuidv4()]);
-
+function RespSection({ workExp, onChange }) {
+  /* 
+add something that shows the instances as one <ul> when isCompleted
+*/
   return (
     <>
-      {instIdList.map((id) => (
-        <RespInstance key={id} id={id} handleRemove={setInstIdList} />
+      {workExp.resp.map((item) => (
+        <RespInstance
+          key={item.id}
+          id={item.id}
+          respItem={item.content}
+          onChange={onChange}
+        />
       ))}
-      <InstanceButton type="addNew" handleClick={setInstIdList} />
+      <InstanceButton type="addNew" context="item" handleClick={onChange} />
     </>
   );
 }
 
-function RespInstance() {}
+function RespInstance({ respItem, id, onChange }) {
+  let respField;
+  respField = (
+    <div className="resp-instance">
+      <Input
+        value={respItem}
+        onChange={onChange}
+        instanceId={id}
+        type="text"
+        subType="resp"
+        parentSection="resp"
+      />
+    </div>
+  );
+
+  return (
+    <>
+      {respField}
+      <div className="instance-buttons">
+        <InstanceButton
+          type="remove"
+          context="item"
+          instanceId={id}
+          handleClick={onChange}
+        />
+      </div>
+    </>
+  );
+}
 export { WorkInstance, WorkSection };
