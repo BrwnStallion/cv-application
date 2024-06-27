@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 function SchoolInstance({ id, handleRemove }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [schoolExp, setSchoolExp] = useState({
-    id: uuidv4(),
     schoolName: "",
     degreeType: "",
     degreeName: "",
@@ -25,7 +24,7 @@ function SchoolInstance({ id, handleRemove }) {
   -the [] is to define 'accum' as an empty array
   */
   const inputMap = Object.entries(schoolExp).reduce((accum, [key, value]) => {
-    if (key !== "id" && key !== "currentStatus") {
+    if (key !== "currentStatus") {
       accum.push(key);
     }
     return accum;
