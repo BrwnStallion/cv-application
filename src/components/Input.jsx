@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Input({ value, setValue, type, subType, parentSection }) {
+function Input({ value, onChange, type, subType, parentSection }) {
   /* 
   type: name, email, phone, text, date, checkbox
   subType: school, degreeType, degreeName, employer, position, resp, startDate,
@@ -11,7 +11,7 @@ function Input({ value, setValue, type, subType, parentSection }) {
 
   const updateValue = (e) => {
     const newValue = e.target.value;
-    setValue((prevValues) => ({ ...prevValues, [type]: newValue }));
+    onChange((prevValues) => ({ ...prevValues, [type]: newValue }));
   };
 
   const labelAttributes = {
