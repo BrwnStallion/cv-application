@@ -52,7 +52,7 @@ function SchoolInstance() {
         <InstanceButton
           type="completeEdit"
           completeState={isCompleted}
-          setState={setIsCompleted}
+          setComplete={setIsCompleted}
         />
         <InstanceButton type="remove" />
       </div>
@@ -71,10 +71,21 @@ function SchoolInstance() {
 }
 
 function SchoolSection() {
+  const [instanceAmount, setInstanceAmount] = useState(1);
+  const [instIdList, setInstIdList] = useState([uuidv4()]);
+  /* 
+  pass a state down to the remove button on each instance so that it can be
+  removed on the section level
+
+  pass a setState down to the addNew button so that it can add a new instance
+  on the section level
+  */
   return (
     <>
-      <SchoolInstance />
-      <InstanceButton type="addNew" />
+      {instIdList.map((id) => (
+        <SchoolInstance key={id} />
+      ))}
+      <InstanceButton type="addNew" handleClick={setInstIdList} />
     </>
   );
   /* 
