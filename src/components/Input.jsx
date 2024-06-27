@@ -25,6 +25,15 @@ function Input({ value, setValue, type, subType, parentSection }) {
     value: value,
     onChange: "",
   };
+  // Lookup for the various subType 'text' type input fields
+  const textLabelContent = {
+    school: "School Name",
+    degreeType: "Degree Type",
+    degreeName: "Degree Name",
+    employer: "Employer",
+    position: "Position",
+    resp: "Responsibility",
+  };
 
   switch (type) {
     case "name":
@@ -40,7 +49,7 @@ function Input({ value, setValue, type, subType, parentSection }) {
       break;
     case "text":
       labelAttributes.forAttr = subType;
-      labelAttributes.content = "";
+      labelAttributes.content = textLabelContent[subType];
       inputAttributes.id = subType;
       inputAttributes.name = subType;
       break;
