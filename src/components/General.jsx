@@ -23,15 +23,15 @@ function GeneralInfo() {
   } else {
     generalFields = (
       <div className="general-info">
-        <Input value={generalInfo.name} setValue={setGeneralInfo} type="name" />
+        <Input value={generalInfo.name} onChange={setGeneralInfo} type="name" />
         <Input
           value={generalInfo.email}
-          setValue={setGeneralInfo}
+          onChange={setGeneralInfo}
           type="email"
         />
         <Input
           value={generalInfo.phone}
-          setValue={setGeneralInfo}
+          onChange={setGeneralInfo}
           type="phone"
         />
       </div>
@@ -44,7 +44,7 @@ function GeneralInfo() {
         <InstanceButton
           type="completeEdit"
           completeState={isCompleted}
-          setState={setIsCompleted}
+          handleClick={setIsCompleted}
         />
       </div>
     </>
