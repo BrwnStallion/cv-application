@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function InstanceButton({ type, completeState, setState }) {
+function InstanceButton({ type, completeState, handleClick }) {
   /* 'complete'/'edit', 'remove', 'add new' buttons */
   let text;
   switch (type) {
@@ -15,14 +15,17 @@ function InstanceButton({ type, completeState, setState }) {
       text = "Add New";
       break;
   }
-  const commitInstance = (e) => {
+
+  const onClick = (e) => {
     if (e.target.className === "completeEdit") {
-      setState((prevState) => !prevState);
+      handleClick((prevState) => !prevState);
+    } else if (e.target.className === "addNew") {
+      // add logic for adding new instance, using passed down set function
     }
   };
 
   return (
-    <button className={type} onClick={commitInstance}>
+    <button className={type} onClick={onClick}>
       {text}
     </button>
   );
