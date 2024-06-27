@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-function InstanceButton({ type, completeState, handleClick }) {
+function InstanceButton({ type, completeState, instanceId, handleClick }) {
   /* 'complete'/'edit', 'remove', 'add new' buttons */
   let text;
   switch (type) {
@@ -23,6 +23,8 @@ function InstanceButton({ type, completeState, handleClick }) {
     } else if (e.target.className === "addNew") {
       // add new instance, using passed-down set function
       handleClick((prevIds) => [...prevIds, uuidv4()]);
+    } else if (e.target.className === "remove") {
+      handleClick((prevIds) => prevIds.filter((id) => id !== instanceId));
     }
   };
 
