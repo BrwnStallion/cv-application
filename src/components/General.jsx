@@ -46,7 +46,6 @@ function GeneralInfo() {
           completeState={isCompleted}
           setState={setIsCompleted}
         />
-        <InstanceButton type="remove" />
       </div>
     </>
   );
