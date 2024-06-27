@@ -5,44 +5,11 @@ import Section from "./components/Section.jsx";
 import { GeneralInfo } from "./components/General.jsx";
 import { SchoolSection } from "./components/School.jsx";
 import { WorkSection } from "./components/Work.jsx";
-import { Input } from "./components/Input.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const sectionInfo = [
-    {
-      id: 1,
-      title: "General Information",
-      inputForms: 3,
-      types: ["text", "email", "phone"],
-    },
-    {
-      id: 2,
-      title: "Educational Experience",
-      inputForms: 4,
-      types: ["text", "text", "text", "date"],
-    },
-    {
-      id: 3,
-      title: "Professional Experience",
-      inputForms: 5,
-      types: ["text", "text", "text", "date", "date"],
-    },
-  ];
-
   return (
     <>
       <h1>CV Generator</h1>
-      <div className="sections">
-        {/* {sectionInfo.map((section) => (
-          <Section key={section.id} title={section.title}>
-            {section.types.map((type, index) => (
-              <Input key={index} type={type} />
-            ))}
-          </Section>
-        ))} */}
-      </div>
       <Section title="General Information">
         <GeneralInfo />
       </Section>
@@ -52,11 +19,6 @@ function App() {
       <Section title="Professional Experience">
         <WorkSection />
       </Section>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
     </>
   );
 }
