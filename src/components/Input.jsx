@@ -4,7 +4,7 @@ import { useState } from "react";
 function Input({ value, onChange, type, subType, parentSection }) {
   /* 
   type: name, email, phone, text, date, checkbox
-  subType: schoolName, degreeType, degreeName, employer, position, resp, startDate,
+  subType: schoolName, degreeType, degreeName, employerName, position, resp, startDate,
   endDate
   parentSection: school, work
   */
@@ -40,8 +40,8 @@ function Input({ value, onChange, type, subType, parentSection }) {
     schoolName: "School Name",
     degreeType: "Degree Type",
     degreeName: "Degree Name",
-    employer: "Employer",
-    position: "Position",
+    employerName: "Employer",
+    positionName: "Position",
     resp: "Responsibility",
   };
 
