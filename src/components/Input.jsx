@@ -4,14 +4,24 @@ import { useState } from "react";
 function Input({ value, onChange, type, subType, parentSection }) {
   /* 
   type: name, email, phone, text, date, checkbox
-  subType: school, degreeType, degreeName, employer, position, resp, startDate,
+  subType: schoolName, degreeType, degreeName, employer, position, resp, startDate,
   endDate
   parentSection: school, work
   */
 
   const updateValue = (e) => {
     const newValue = e.target.value;
-    onChange((prevValues) => ({ ...prevValues, [type]: newValue }));
+    // input parent div class is: 'input [general/school/work]'
+    const inputClassList = Array.from(e.target.parentElement.classList);
+    const isGeneral = inputClassList.includes("general");
+    const isSchool = inputClassList.includes("school");
+    const isWork = inputClassList.includes("work");
+
+    if (isGeneral) {
+      onChange((prevValues) => ({ ...prevValues, [type]: newValue }));
+    } else if (isSchool || isWork) {
+      onChange((prevValues) => ({ ...prevValues, [subType]: newValue }));
+    }
   };
 
   const labelAttributes = {
@@ -27,7 +37,7 @@ function Input({ value, onChange, type, subType, parentSection }) {
   };
   // Lookup for the various subType 'text' type input fields
   const textLabelContent = {
-    school: "School Name",
+    schoolName: "School Name",
     degreeType: "Degree Type",
     degreeName: "Degree Name",
     employer: "Employer",
@@ -99,7 +109,7 @@ function Input({ value, onChange, type, subType, parentSection }) {
 
   return (
     <>
-      <div className={"input " + type}>{inputControl}</div>
+      <div className={"input " + parentSection}>{inputControl}</div>
     </>
   );
   /* 
