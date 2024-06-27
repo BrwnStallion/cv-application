@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Input({ value, onChange, type, subType, parentSection }) {
+function Input({ value, onChange, type, subType, parentSection, instanceId }) {
   /* 
   type: name, email, phone, text, date, checkbox
   subType: schoolName, degreeType, degreeName, employerName, position, resp, startDate,
@@ -16,11 +16,35 @@ function Input({ value, onChange, type, subType, parentSection }) {
     const isGeneral = inputClassList.includes("general");
     const isSchool = inputClassList.includes("school");
     const isWork = inputClassList.includes("work");
+    const isResp = inputClassList.includes("resp");
 
     if (isGeneral) {
       onChange((prevValues) => ({ ...prevValues, [type]: newValue }));
     } else if (isSchool || isWork) {
       onChange((prevValues) => ({ ...prevValues, [subType]: newValue }));
+    } else if (isResp) {
+      onChange((prevValues) => {
+        // index of resp object that needs updating
+        const index = prevValues.resp.findIndex(
+          (item) => item.id === instanceId
+        );
+        // new resp object
+        const newItem = {
+          ...prevValues.resp[index],
+          content: newValue,
+        };
+        // new array of resp objects
+        const newArray = [
+          ...prevValues.resp.slice(0, index),
+          newItem,
+          ...prevValues.resp.slice(index + 1),
+        ];
+
+        return {
+          ...prevValues,
+          resp: newArray,
+        };
+      });
     }
   };
 
@@ -112,15 +136,6 @@ function Input({ value, onChange, type, subType, parentSection }) {
       <div className={"input " + parentSection}>{inputControl}</div>
     </>
   );
-  /* 
-  Types of Input Controls Req'd
-    - name
-    - email
-    - phone number
-    - text (school, work, titles, etc.)
-    - dates (started, completed)
-    - checkbox (currently studying/employed)
-  */
 }
 
 export { Input };
