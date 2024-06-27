@@ -9,12 +9,13 @@ function Input({ value, setValue, type, subType, parentSection }) {
   parentSection: school, work
   */
 
-  function handleChange() {
-    // setValue({...})
-  }
+  const updateValue = (e) => {
+    const newValue = e.target.value;
+    setValue((prevValues) => ({ ...prevValues, [type]: newValue }));
+  };
 
   const labelAttributes = {
-    for: type,
+    forAttr: type,
     content: "",
   };
   const inputAttributes = {
@@ -38,13 +39,13 @@ function Input({ value, setValue, type, subType, parentSection }) {
       inputAttributes.type = "tel";
       break;
     case "text":
-      labelAttributes.for = subType;
+      labelAttributes.forAttr = subType;
       labelAttributes.content = "";
       inputAttributes.id = subType;
       inputAttributes.name = subType;
       break;
     case "date":
-      labelAttributes.for = subType;
+      labelAttributes.forAttr = subType;
       labelAttributes.content =
         subType === "startDate" ? "Start Date" : "Completion Date";
       inputAttributes.type = "text";
@@ -52,7 +53,7 @@ function Input({ value, setValue, type, subType, parentSection }) {
       inputAttributes.name = subType;
       break;
     case "checkbox":
-      labelAttributes.for = "current";
+      labelAttributes.forAttr = "current";
       labelAttributes.content = `Current ${
         parentSection === "school" ? "School" : "Employer"
       }`;
@@ -62,7 +63,7 @@ function Input({ value, setValue, type, subType, parentSection }) {
   }
 
   const label = (
-    <label for={labelAttributes.for}>{labelAttributes.content}</label>
+    <label htmlFor={labelAttributes.forAttr}>{labelAttributes.content}</label>
   );
   const input = (
     <input
@@ -70,7 +71,7 @@ function Input({ value, setValue, type, subType, parentSection }) {
       id={inputAttributes.id}
       name={inputAttributes.name}
       value={inputAttributes.value}
-      onChange={handleChange}
+      onChange={updateValue}
     ></input>
   );
 
