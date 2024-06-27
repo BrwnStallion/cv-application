@@ -9,23 +9,47 @@ function WorkInstance({ id, handleRemove }) {
   const [workExp, setWorkExp] = useState({
     employerName: "",
     positionName: "",
-    resp: [""],
+    resp: {},
+    startDate: "",
     endDate: "",
     currentStatus: "",
   });
 
   let parentSection = "work";
+  const inputMap = Object.entries(workExp).reduce((accum, [key, value]) => {
+    if (key != "currentStatus") {
+      accum.push(key);
+    }
+    return accum;
+  }, []);
+
   let workFields;
   if (isCompleted) {
     <p></p>;
   } else {
     workFields = (
       <div className="work-instance">
-        <Input type="text" subType="employerName" parentSection="work" />
-        <Input type="text" subType="positionName" parentSection="work" />
-        <Input type="date" subType="startDate" parentSection="work" />
-        <Input type="date" subType="endDate" parentSection="work" />
-        <Input type="checkbox" parentSection="work" />
+        {inputMap.map((subType) => {
+          if (subType === "resp") {
+            // instantiate resp
+          } else {
+            return (
+              <Input
+                key={subType}
+                value={workExp[subType]}
+                onChange={setWorkExp}
+                type={
+                  subType === "endDate" || subType === "startDate"
+                    ? "date"
+                    : "text"
+                }
+                subType={subType}
+                parentSection={parentSection}
+              />
+            );
+          }
+        })}
+        <Input type="checkbox" parentSection={parentSection} />
       </div>
     );
   }
