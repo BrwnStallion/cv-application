@@ -28,7 +28,7 @@ function WorkInstance() {
         <InstanceButton
           type="completeEdit"
           completeState={isCompleted}
-          setState={setIsCompleted}
+          handleClick={setIsCompleted}
         />
         <InstanceButton type="remove" />
       </div>
