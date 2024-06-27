@@ -12,6 +12,7 @@ function GeneralInfo() {
   });
 
   let generalFields;
+  const parentSection = "general";
   if (isCompleted) {
     generalFields = (
       <ul className="general-info">
@@ -23,16 +24,23 @@ function GeneralInfo() {
   } else {
     generalFields = (
       <div className="general-info">
-        <Input value={generalInfo.name} onChange={setGeneralInfo} type="name" />
+        <Input
+          value={generalInfo.name}
+          onChange={setGeneralInfo}
+          type="name"
+          parentSection={parentSection}
+        />
         <Input
           value={generalInfo.email}
           onChange={setGeneralInfo}
           type="email"
+          parentSection={parentSection}
         />
         <Input
           value={generalInfo.phone}
           onChange={setGeneralInfo}
           type="phone"
+          parentSection={parentSection}
         />
       </div>
     );
