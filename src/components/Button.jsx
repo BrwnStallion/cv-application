@@ -15,14 +15,14 @@ function InstanceButton({ type, completeState, setState }) {
       text = "Add New";
       break;
   }
-  function handleClick(e) {
+  const commitInstance = (e) => {
     if (e.target.className === "completeEdit") {
-      setState(!completeState);
+      setState((prevState) => !prevState);
     }
-  }
+  };
 
   return (
-    <button className={type} onClick={handleClick}>
+    <button className={type} onClick={commitInstance}>
       {text}
     </button>
   );
