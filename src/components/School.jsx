@@ -4,7 +4,7 @@ import { Input } from "./Input";
 import { InstanceButton } from "./Button";
 import { v4 as uuidv4 } from "uuid";
 
-function SchoolInstance() {
+function SchoolInstance({ id, handleRemove }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [schoolExp, setSchoolExp] = useState({
     id: uuidv4(),
@@ -58,7 +58,7 @@ function SchoolInstance() {
             parentSection={parentSection}
           />
         ))}
-        <Input type="checkbox" parentSection={schoolExp.parentSection} />
+        <Input type="checkbox" parentSection={parentSection} />
       </div>
     );
   }
@@ -72,7 +72,11 @@ function SchoolInstance() {
           completeState={isCompleted}
           handleClick={setIsCompleted}
         />
-        <InstanceButton type="remove" />
+        <InstanceButton
+          type="remove"
+          instanceId={id}
+          handleClick={handleRemove}
+        />
       </div>
     </>
   );
@@ -89,7 +93,6 @@ function SchoolInstance() {
 }
 
 function SchoolSection() {
-  const [instanceAmount, setInstanceAmount] = useState(1);
   const [instIdList, setInstIdList] = useState([uuidv4()]);
   /* 
   pass a state down to the remove button on each instance so that it can be
@@ -101,7 +104,7 @@ function SchoolSection() {
   return (
     <>
       {instIdList.map((id) => (
-        <SchoolInstance key={id} />
+        <SchoolInstance key={id} id={id} handleRemove={setInstIdList} />
       ))}
       <InstanceButton type="addNew" handleClick={setInstIdList} />
     </>
