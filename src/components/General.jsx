@@ -24,24 +24,15 @@ function GeneralInfo() {
   } else {
     generalFields = (
       <div className="general-info">
-        <Input
-          value={generalInfo.name}
-          onChange={setGeneralInfo}
-          type="name"
-          parentSection={parentSection}
-        />
-        <Input
-          value={generalInfo.email}
-          onChange={setGeneralInfo}
-          type="email"
-          parentSection={parentSection}
-        />
-        <Input
-          value={generalInfo.phone}
-          onChange={setGeneralInfo}
-          type="phone"
-          parentSection={parentSection}
-        />
+        {Object.keys(generalInfo).map((key) => (
+          <Input
+            key={key}
+            value={generalInfo[key]}
+            onChange={setGeneralInfo}
+            type={key}
+            parentSection={parentSection}
+          />
+        ))}
       </div>
     );
   }
