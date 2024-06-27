@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function InstanceButton({ type, completeState, handleClick }) {
   /* 'complete'/'edit', 'remove', 'add new' buttons */
@@ -20,7 +21,8 @@ function InstanceButton({ type, completeState, handleClick }) {
     if (e.target.className === "completeEdit") {
       handleClick((prevState) => !prevState);
     } else if (e.target.className === "addNew") {
-      // add logic for adding new instance, using passed down set function
+      // add new instance, using passed-down set function
+      handleClick((prevIds) => [...prevIds, uuidv4()]);
     }
   };
 
