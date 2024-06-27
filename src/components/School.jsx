@@ -6,41 +6,59 @@ import { v4 as uuidv4 } from "uuid";
 
 function SchoolInstance() {
   const [isCompleted, setIsCompleted] = useState(false);
-  const [schoolExp, setSchoolExp] = useState([
-    {
-      id: uuidv4(),
-      schoolName: "",
-      degreeType: "",
-      degreeName: "",
-      dateGrad: "",
-      currentStatus: "",
-    },
-  ]);
+  const [schoolExp, setSchoolExp] = useState({
+    id: uuidv4(),
+    schoolName: "",
+    degreeType: "",
+    degreeName: "",
+    endDate: "",
+    currentStatus: "",
+  });
+
+  let parentSection = "school";
+  /* 
+  inputMap:
+  -takes the schoolExp object
+  -breaks it into an array of [key, value arrays.
+  -Then it reduces that array, creating an accumulator array that only has
+   keys pairs that I want for mapping to input fields.
+  -the [] is to define 'accum' as an empty array
+  */
+  const inputMap = Object.entries(schoolExp).reduce((accum, [key, value]) => {
+    if (key !== "id" && key !== "currentStatus") {
+      accum.push(key);
+    }
+    return accum;
+  }, []);
 
   let schoolFields;
   if (isCompleted) {
-    schoolFields = schoolExp.map((school) => {
-      return (
-        <ul key={school.id} className="school-exp">
-          <li>School Name: {school.schoolName}</li>
-          <li>Degree Type: {school.degreeType}</li>
-          <li>Degree Name: {school.degreeName}</li>
-          <li>
-            {school.currentStatus === "current"
-              ? "Currently enrolled"
-              : "End Date" + school.dateGrad}
-          </li>
-        </ul>
-      );
-    });
+    schoolFields = (
+      <ul className="school-instance">
+        <li>School Name: {schoolExp.schoolName}</li>
+        <li>Degree Type: {schoolExp.degreeType}</li>
+        <li>Degree Name: {schoolExp.degreeName}</li>
+        <li>
+          {schoolExp.currentStatus === "current"
+            ? "Currently enrolled"
+            : "Completion Date: " + schoolExp.endDate}
+        </li>
+      </ul>
+    );
   } else {
     schoolFields = (
       <div className="school-instance">
-        <Input type="text" subType="school" parentSection="school" />
-        <Input type="text" subType="degreeType" parentSection="school" />
-        <Input type="text" subType="degreeName" parentSection="school" />
-        <Input type="date" subType="endDate" parentSection="school" />
-        <Input type="checkbox" parentSection="school" />
+        {inputMap.map((subType) => (
+          <Input
+            key={subType}
+            value={schoolExp[subType]}
+            onChange={setSchoolExp}
+            type={subType === "endDate" ? "date" : "text"}
+            subType={subType}
+            parentSection={parentSection}
+          />
+        ))}
+        <Input type="checkbox" parentSection={schoolExp.parentSection} />
       </div>
     );
   }
@@ -52,7 +70,7 @@ function SchoolInstance() {
         <InstanceButton
           type="completeEdit"
           completeState={isCompleted}
-          setComplete={setIsCompleted}
+          handleClick={setIsCompleted}
         />
         <InstanceButton type="remove" />
       </div>
