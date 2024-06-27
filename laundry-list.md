@@ -2,8 +2,6 @@ CV Application Project
 
 06/26/24 - main
 
-- Professional/Education
-  - has ability to add/remove new subgroups; figure this out
 - Input/label
   - Value restrictions / regex
 - Professional Experience
@@ -12,6 +10,9 @@ CV Application Project
 - Figure out form layout. If all of it is one form with sections. Or separate
   forms
   - Maybe sections within the form allow for label names to be reused?
+- Professional/Education
+  - has ability to add/remove new subgroups; figure this out
+  - COMPLETE
 - Figure out how to update the section info object from the input component
   - Currently can't figure out how to pass the info object AND the setInfo
   - COMPLETE
