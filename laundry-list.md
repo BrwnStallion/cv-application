@@ -1,5 +1,18 @@
 CV Application Project
 
+06/27/24 - main
+
+- Input/label
+  - Value restrictions / regex
+- Professional Experience
+  - responsibilities field is just one input, with a button to add/remove
+  - add functionality to instance buttons
+    - COMPLETE
+- Add feature to gray out completion date if 'current' is selected
+- Figure out form layout. If all of it is one form with sections. Or separate
+  forms
+  - Maybe sections within the form allow for label names to be reused?
+
 06/26/24 - main
 
 - Input/label
